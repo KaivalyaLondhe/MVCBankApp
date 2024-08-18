@@ -7,12 +7,15 @@
 </head>
 <body class="bg-gray-100">
 	<%-- Include header and navigation --%>
-	<%@ include file="CustomerLandingPage.jsp"%>
+	<%@ include file="CustomerNavbar.jsp"%>
 	<%
 		String firstName = (String) request.getAttribute("firstName");
 		String lastName = (String) request.getAttribute("lastName");
-		if (firstName == null || lastName == null) {
+		String currentPassword = (String) request.getAttribute("currentPassword");
+		if (firstName == null) {
 			firstName = "";
+		}
+		if (lastName == null) {
 			lastName = "";
 		}
 	%>
@@ -20,25 +23,32 @@
 	<div class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
 		<h2 class="text-2xl font-semibold mb-4">Edit Profile</h2>
 
-		<form action="EditProfileController" method="post">
+		<form action="editprofile" method="post">
 			<div class="mb-4">
-
-
-				<label for="firstName" class="block text-gray-700 font-medium mb-2">First
-					Name</label> <input id="firstName" name="firstName" type="text"
-					value="<%=request.getAttribute("firstName") != null ? request.getAttribute("firstName") : ""%>"
+				<label for="firstName" class="block text-gray-700 font-medium mb-2">First Name</label>
+				<input id="firstName" name="firstName" type="text"
+					placeholder="<%= firstName %>"
+					value="<%= firstName %>"
 					class="block w-full p-2 border border-gray-300 rounded-lg" required>
 			</div>
 
 			<div class="mb-4">
-				<label for="lastName" class="block text-gray-700 font-medium mb-2">Last
-					Name</label> <input id="lastName" name="lastName" type="text"
-					value="<%=request.getAttribute("lastName") != null ? request.getAttribute("lastName") : ""%>"
+				<label for="lastName" class="block text-gray-700 font-medium mb-2">Last Name</label>
+				<input id="lastName" name="lastName" type="text"
+					placeholder="<%= lastName %>"
+					value="<%= lastName %>"
+					class="block w-full p-2 border border-gray-300 rounded-lg" required>
+			</div>
+
+		
+			<div class="mb-4">
+				<label for="currentPassword" class="block text-gray-700 font-medium mb-2">Current Password</label>
+				<input id="currentPassword" name="currentPassword" type="password"
 					class="block w-full p-2 border border-gray-300 rounded-lg" required>
 			</div>
 
 			<div class="mb-4">
-				<label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+				<label for="password" class="block text-gray-700 font-medium mb-2">New Password</label>
 				<input id="password" name="password" type="password"
 					class="block w-full p-2 border border-gray-300 rounded-lg" required>
 			</div>

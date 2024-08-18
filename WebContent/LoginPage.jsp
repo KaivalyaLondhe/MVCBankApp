@@ -25,7 +25,7 @@
 					</p>
 				</div>
 
-				<form class="max-w-md md:ml-auto w-full" action="LoginController"
+				<form class="max-w-md md:ml-auto w-full" action="login"
 					method="post">
 					<h3 class="text-gray-800 text-3xl font-extrabold mb-8">Sign in
 					</h3>

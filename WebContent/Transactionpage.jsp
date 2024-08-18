@@ -4,15 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Transaction Page</title>
+<title>New Transaction</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-	<%@ include file="CustomerLandingPage.jsp"%>
+	<%@ include file="CustomerNavbar.jsp"%>
 	<div class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
 		<h2 class="text-2xl font-semibold mb-4">Create Transaction</h2>
 
-		<!-- Display Success or Error Message -->
 		<%
 			String successMessage = (String) request.getAttribute("success");
 			String errorMessage = (String) request.getAttribute("error");
@@ -43,7 +42,6 @@
 				</select>
 			</div>
 
-			<!-- Sender Account Number is fetched from session, so no input field -->
 			<input type="hidden" id="senderAccountNumber"
 				name="senderAccountNumber"
 				value="<%=session.getAttribute("accountNumber")%>">

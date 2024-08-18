@@ -11,44 +11,45 @@ import javax.servlet.http.HttpSession;
 
 import com.aurionpro.model.DbUtil;
 
-@WebServlet("/LoginController")
+@WebServlet("/login")
 public class LoginController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public LoginController() {
-        super();
-    }
+	public LoginController() {
+		super();
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String role = request.getParameter("role");
-        
-        DbUtil dbUtil = DbUtil.getDbUtil();
-       boolean isValidUser = dbUtil.validateCredentials(email, password, role);
-        
-        if (isValidUser) {
-            HttpSession session = request.getSession();
-            session.setAttribute("email", email);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String role = request.getParameter("role");
 
-            RequestDispatcher requestDispatcher;
-            if ("admin".equalsIgnoreCase(role)) {
-                requestDispatcher = request.getRequestDispatcher("AdminLandingPage.jsp");
-            } else if ("customer".equalsIgnoreCase(role)) {
-            	
-                requestDispatcher = request.getRequestDispatcher("CustomerLandingPage.jsp");
-            } else {
-                requestDispatcher = request.getRequestDispatcher("LoginFailed.jsp");
-            }
-            requestDispatcher.forward(request, response);
-        } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("LoginFailed.jsp");
-            requestDispatcher.forward(request, response);
-        }
-    }
+		DbUtil dbUtil = DbUtil.getDbUtil();
+		boolean isValidUser = dbUtil.validateCredentials(email, password, role);
 
-   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-   }
+		if (isValidUser) {
+			HttpSession session = request.getSession();
+			session.setAttribute("email", email);
+
+			RequestDispatcher requestDispatcher;
+			if ("admin".equalsIgnoreCase(role)) {
+				requestDispatcher = request.getRequestDispatcher("AdminLandingPage.jsp");
+			} else if ("customer".equalsIgnoreCase(role)) {
+
+				requestDispatcher = request.getRequestDispatcher("CustomerLandingPage.jsp");
+			} else {
+				requestDispatcher = request.getRequestDispatcher("LoginFailed.jsp");
+			}
+			requestDispatcher.forward(request, response);
+		} else {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("LoginFailed.jsp");
+			requestDispatcher.forward(request, response);
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
 }
-

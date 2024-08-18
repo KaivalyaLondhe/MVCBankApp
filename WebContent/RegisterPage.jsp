@@ -14,7 +14,7 @@
 		<h1 class="mb-8 font-extrabold text-4xl">Register</h1>
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-			<form action="RegisterController" method="post">
+			<form action="register" method="post">
 				<c:if test="${not empty errorMessage}">
 					<div class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
 						<p>

@@ -6,39 +6,58 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Select Customer</title>
+<title>Account Number Generation</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-gray-100">
 
-	<%@ include file="AdminLandingPage.jsp"%>
+	<%@ include file="Navbar.jsp"%>
+<%
 
+		if (email == null) {
+			response.sendRedirect("LoginPage.jsp");
+			return;
+		}
+	%>
+
+
+	<script>
+		function handleLogout() {
+			sessionStorage.clear();
+			window.location.href = 'LoginPage.jsp';
+		}
+
+		document.querySelector('a[href="LogoutServlet"]').addEventListener(
+				'click', function(event) {
+					event.preventDefault();
+					handleLogout();
+				});
+	</script>
 	<div class="p-10">
 		<h1 class="mb-8 font-extrabold text-4xl text-white">Select
 			Customer and Generate Account Number</h1>
 
-		<form action="SelectCustomerController" method="post"
+		<form action="accountnumbergenerator" method="post"
 			class="mb-8 bg-gray-800 p-6 rounded-lg shadow-md">
 			<label for="customerId"
 				class="block text-lg font-medium text-gray-300">Select
-				Customer:</label> <select id="customerId" name="customerId"
+				Customer:</label> 
+			<select id="customerId" name="customerId"
 				class="mt-2 mb-4 p-2 border border-gray-600 rounded-lg bg-gray-700 text-gray-200"
 				required>
-				<option value="">Select by Customer ID or Email</option>
+				<option value="">Select by Customer ID</option>
 				<%
 					List<Customer> customers = (List<Customer>) request.getAttribute("customerList");
 					if (customers != null) {
 						for (Customer customer : customers) {
 				%>
-				<option value="<%=customer.getCustomerId()%>"><%=customer.getEmail()%>
-					(ID:
-					<%=customer.getCustomerId()%>)
-				</option>
+				<option value="<%=customer.getCustomerId()%>">ID: <%=customer.getCustomerId()%></option>
 				<%
-					}
+						}
 					}
 				%>
-			</select> <input type="submit" value="Submit"
+			</select> 
+			<input type="submit" value="Submit"
 				class="bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
 		</form>
 
